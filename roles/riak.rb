@@ -6,17 +6,11 @@ run_list(
 default_attributes(
   "riak" => {
     "args" => {
-      "-name" => "riak@127.0.0.1",
       "+zdbbl" => 32768
     },
     "config" => {
-      "riak_api" => {
-        "pb" =>
-          { "__string_127.0.0.1" => 8087 }
-      },
       "riak_core" => {
-        "http" =>
-          { "__string_127.0.0.1" => 8098 }
+        "ring_creation_size" => 8,
       },
       "riak_kv" => {
         "anti_entropy_concurrency" => 1,
