@@ -9,7 +9,7 @@ This is a Vagrant project powered by Chef to bring up a local
 ### Install Vagrant
 
 Download and install Vagrant via the
-[Vagrant installer](http://downloads.vagrantup.com/).
+[Vagrant installer](http://www.vagrantup.com/downloads.html).
 
 ### Install Vagrant plugins
 
