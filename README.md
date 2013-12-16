@@ -19,7 +19,9 @@ $ vagrant plugin install vagrant-omnibus
 $ vagrant plugin install vagrant-cachier
 ```
 
-### Clone repository
+## Running
+
+### Clone project repository
 
 ``` bash
 $ git clone https://github.com/hectcastro/vagrant-datomic-riak.git
@@ -29,12 +31,43 @@ $ cd vagrant-datomic-riak
 ### Launch cluster
 
 ``` bash
+$ export DATOMIC_RIAK_NODES=1
+$ export DATOMIC_RIAK_CACHE=1 # Makes use of vagrant-cachier plugin
+$ export DATOMIC_LICENSE_KEY="..."
 $ vagrant up
 ```
 
-### Test cluster
+## Testing
 
-TBD
+### Install the Datomic Pro peer library
+
+```bash
+$ unzip datomic-pro-0.9.4360.zip
+$ cd datomic-pro-0.9.4360
+$ ./bin/maven-install
+```
+
+### Run test project
+
+```bash
+$ git clone https://github.com/hectcastro/vagrant-datomic-riak-test.git
+$ cd vagrant-datomic-riak-test
+$ lein run
+```
+
+A successful run should return something like this:
+
+```
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/Users/hector/.m2/repository/org/slf4j/slf4j-nop/1.7.5/slf4j-nop-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/Users/hector/.m2/repository/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.helpers.NOPLoggerFactory]
+#<promise$settable_future$reify__4417@ed80876: {:db-before datomic.db.Db@da5ca3f3, :db-after datomic.db.Db@4b163359, :tx-data #<ArrayList [datomic.db.Datum@fc751ce5, datomic.db.Datum@ce599ea2]>, :tempids {-9223350046623220288 17592186045417}}>
+#<HashSet [[17592186045417]]>
+{:db/doc Hello world, :db/id 17592186045417}
+{:db/ident :db/doc, :db/valueType :db.type/string, :db/cardinality :db.cardinality/one, :db/fulltext true, :db/doc Documentation string for an entity., :db/id 62}
+```
 
 ## Vagrant box
 
