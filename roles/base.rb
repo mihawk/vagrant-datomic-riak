@@ -15,7 +15,7 @@ default_attributes(
       },
       "net" => {
         "core" => {
-          "somaxconn" => 4000
+          "somaxconn" => 40000
         },
         "ipv4" => {
           "tcp_max_syn_backlog" => 40000,
