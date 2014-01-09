@@ -5,7 +5,6 @@ cookbook "ntp"
 cookbook "java"
 cookbook "openssh"
 
-cookbook "sysctl", github: "onehealth-cookbooks/sysctl", ref: "v0.3.4"
 cookbook "datomic", github: "hectcastro/chef-datomic", ref: "0.1.0"
 cookbook "zookeeper", github: "hectcastro/chef-zookeeper", ref: "0.1.0"
-cookbook "riak", github: "basho/riak-chef-cookbook", ref: "2.4.1"
+cookbook "riak", github: "basho/riak-chef-cookbook", ref: "2.4.2"
