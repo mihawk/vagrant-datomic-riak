@@ -37,6 +37,16 @@ $ export DATOMIC_LICENSE_KEY="..."
 $ vagrant up
 ```
 
+### Environmental variables
+
+- `DATOMIC_RIAK_NODES` – The number of node you want to spin up (default: `1`)
+- `DATOMIC_RIAK_OS` – The operating system you want to use (`CENTOS` or
+  `UBUNTU`, default: `CENTOS`)
+- `DATOMIC_RIAK_CACHE` – Whether you want to allow Vagrant to use the
+  [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier) plugin or not
+  (default: `false`)
+- `DATOMIC_LICENSE_KEY` – The Datomic Pro license key
+
 ## Testing
 
 ### Install the Datomic Pro peer library

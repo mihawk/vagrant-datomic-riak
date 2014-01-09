@@ -1,9 +1,22 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-NODES = ENV["DATOMIC_RIAK_NODES"].nil? ? 1 : ENV["DATOMIC_RIAK_NODES"].to_i
+CENTOS = {
+  box: "opscode-centos-6.5",
+  virtualbox_url: "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.5_chef-provisionerless.box",
+  vmware_fusion_url: "http://opscode-vm-bento.s3.amazonaws.com/vagrant/vmware/opscode_centos-6.5_chef-provisionerless.box"
+}
+UBUNTU = {
+  box: "opscode-ubuntu-12.04",
+  virtualbox_url: "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box",
+  vmware_fusion_url: "http://opscode-vm-bento.s3.amazonaws.com/vagrant/vmware/opscode_ubuntu-12.04_chef-provisionerless.box"
+}
 
-Vagrant.configure("2") do |cluster|
+VAGRANTFILE_API_VERSION = "2"
+NODES = ENV["DATOMIC_RIAK_NODES"].nil? ? 1 : ENV["DATOMIC_RIAK_NODES"].to_i
+OS = ENV["DATOMIC_RIAK_OS"].nil? ? CENTOS : Kernel.const_get(ENV["DATOMIC_RIAK_OS"])
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |cluster|
   # Ensure latest version of Chef is installed.
   cluster.omnibus.chef_version = :latest
 
@@ -19,17 +32,18 @@ Vagrant.configure("2") do |cluster|
     last_octet = index * 10
 
     cluster.vm.define "riak#{index}".to_sym do |config|
-      config.vm.box = "opscode-centos-6.5"
+      config.vm.box = OS[:box]
+
 
       config.vm.provider :virtualbox do |vb, override|
-        override.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.5_chef-provisionerless.box"
+        override.vm.box_url = OS[:virtualbox_url]
 
         vb.customize ["modifyvm", :id, "--memory", "1024"]
         vb.customize ["modifyvm", :id, "--cpus", "2"]
       end
 
       config.vm.provider :vmware_fusion do |vm, override|
-        override.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/vmware/opscode_centos-6.5_chef-provisionerless.box"
+        override.vm.box_url = OS[:vmware_fusion_url]
 
         vm.vmx["memsize"] = "1024"
         vm.vmx["numvcpus"] = "2"

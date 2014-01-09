@@ -1,7 +1,6 @@
 name "base"
 description "Base role."
 run_list(
-  "recipe[yum]",
   "recipe[ntp]",
   "recipe[java]",
   "recipe[openssh]"
