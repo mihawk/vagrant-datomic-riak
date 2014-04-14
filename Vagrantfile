@@ -21,8 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |cluster|
   cluster.omnibus.chef_version = :latest
 
   # Utilize the Cachier plugin to cache downloaded packages.
-  unless ENV["DATOMIC_RIAK_CACHE"].nil?
-    cluster.cache.auto_detect = true
+  if Vagrant.has_plugin?("vagrant-cachier") && !ENV["DATOMIC_RIAK_CACHE"].nil?
+    cluster.cache.scope = :box
   end
 
   # Utilize the Berkshelf plugin to resolve cookbook dependencies.
@@ -81,7 +81,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |cluster|
             }
           },
           "datomic" => {
-            "license_key" => (ENV["DATOMIC_LICENSE_KEY"].nil? ? "" : ENV["DATOMIC_LICENSE_KEY"])
+            "license_key" => (ENV["DATOMIC_LICENSE_KEY"].nil? ? "" : ENV["DATOMIC_LICENSE_KEY"]),
+            "license_email" => (ENV["DATOMIC_LICENSE_EMAIL"].nil? ? "" : ENV["DATOMIC_LICENSE_EMAIL"]),
+            "license_download_key" => (ENV["DATOMIC_LICENSE_DOWNLOAD_KEY"].nil? ? "" : ENV["DATOMIC_LICENSE_DOWNLOAD_KEY"])
           }
         }
       end

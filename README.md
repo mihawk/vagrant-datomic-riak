@@ -31,10 +31,11 @@ $ cd vagrant-datomic-riak
 ### Launch cluster
 
 ``` bash
-$ export DATOMIC_RIAK_NODES=1
-$ export DATOMIC_RIAK_CACHE=1 # Makes use of vagrant-cachier plugin
 $ export DATOMIC_LICENSE_KEY="..."
-$ vagrant up
+$ export DATOMIC_LICENSE_EMAIL="hector@basho.com"
+$ # Get this from: https://my.datomic.com/account
+$ export DATOMIC_LICENSE_DOWNLOAD_KEY="e5d112c4-c3d7-11e3-9bbe-1a514932ac01"
+$ DATOMIC_RIAK_CACHE=1 vagrant up
 ```
 
 ### Environmental variables
@@ -46,6 +47,9 @@ $ vagrant up
   [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier) plugin or not
   (default: `false`)
 - `DATOMIC_LICENSE_KEY` – The Datomic Pro license key
+- `DATOMIC_LICENSE_EMAIL` – E-mail address associated with your Datomic account
+- `DATOMIC_LICENSE_DOWNLOAD_KEY` – A key used for authentication when
+  automating the download of Datomic
 
 ## Testing
 
