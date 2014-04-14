@@ -5,8 +5,8 @@ run_list(
 )
 default_attributes(
   "datomic" => {
-    "version" => "0.9.4360",
-    "checksum" => "9481654049ae4eb2965fb8be56904b9f0080d9f5d58be4fa77d19ef99bcc9fd2",
+    "version" => "0.9.4699",
+    "checksum" => "c76148848c7a4c46b95157db2a15205e6b28e469b4a7df0bd659f9c180f3bbdf",
     "host" => "33.33.33.10.xip.io",
     "port" => 4334,
     "protocol" => "riak",
