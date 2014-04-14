@@ -66,6 +66,8 @@ $ ./bin/maven-install
 ```bash
 $ git clone https://github.com/hectcastro/vagrant-datomic-riak-test.git
 $ cd vagrant-datomic-riak-test
+$ sed -i.bak "s/:username \"\"/:username \"${DATOMIC_LICENSE_EMAIL}\"/" project.clj
+$ sed -i.bak "s/:password \"\"/:password \"${DATOMIC_LICENSE_DOWNLOAD_KEY}\"/" project.clj
 $ lein run
 ```
 
